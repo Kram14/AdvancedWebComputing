@@ -1,0 +1,58 @@
+<html>
+<head>
+    <title>m&m</title>
+    <link rel=stylesheet href="style.css">
+</head>
+<body background>
+
+	<div class = 'main'>
+    	<h1>My Assignments</h1>
+    <div class='todo'>
+        <h2>To Do:</h2>
+        <input id='txtbox' type='text' value='World'/>
+        <a id='btn-add' href="#">Add item</a>
+        <ul id='todo-list'>
+        </ul>
+        
+    </div>
+    
+    <div class = 'done'>
+    	<h2>Done:</h2>
+        <ul id='done-list'>
+        </ul>
+    </div>
+    </div>
+
+    <script>
+        var txtBoxEl = document.getElementById('txtbox');
+        var btnShowEl = document.getElementById('btn-add');
+        var todoListEl = document.getElementById('todo-list');
+        var doneListEl = document.getElementById('done-list');
+        btnShowEl.onclick = onClickShow;
+
+        function onClickShow() {
+            var itemEl = document.createElement('li');
+            var listMarkup =
+    '<div class="todo-item">' +
+        '<span class="name">' + txtBoxEl.value + '</span>' +
+        '<a class="complete" href="#">complete</a>' +
+   '</div>';
+            itemEl.innerHTML = listMarkup;
+            var comBtnEl = itemEl.getElementsByClassName('complete')[0];
+            comBtnEl.onclick = onClickComplete;
+
+
+            todoListEl.appendChild(itemEl)
+        }
+
+        function onClickComplete(event) {
+            var comBtnEl = event.target;
+            var liItem = comBtnEl.parentNode;
+            comBtnEl.remove();
+            liItem.remove();
+            doneListEl.appendChild(liItem);
+        }
+    </script>
+</body>
+
+</html>

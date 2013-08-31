@@ -1,0 +1,269 @@
+<html>
+<head>
+    <title>m&m Module 5</title>
+    <link rel=stylesheet href="style.css">
+</head>
+<body>
+        
+
+    <div class='main'>
+    	<h1>m&m To Do List <span id = 'donetask'>0</span> / <span id = 'taskcnt'>0</span></h1>
+	</div>
+	
+    	<div id = 'main-left'>
+    		<h2>To Do:</h2>
+            <div id = 'input-box'>
+	           <input id='txtbox' type='text'/>
+            </div>
+				<br>
+            <div id = 'toggle'>
+                <a id = 'btn-toggle' href = '#'>Toggle all</a> &nbsp; 
+				<a id = 'btn-removeAll' href = '#'>Remove all done task</a>
+            </div>
+	        
+			<ul id='todo-list'>
+
+	        </ul>
+    	</div>
+    
+    <script>
+		var arrayalltask = []; 
+        var arraydone = []; 
+        var arraytask = []; 
+        var donetaskEl = document.getElementById('donetask'); 
+        var taskcntEl = document.getElementById('taskcnt'); 
+        var txtBoxEl = document.getElementById('txtbox'); 
+        var btnToggleEl = document.getElementById('btn-toggle'); 
+        var btnRemoveAll = document.getElementById('btn-removeAll'); 
+        var todoListEl = document.getElementById('todo-list'); 
+		
+        btnToggleEl.onclick = onClickToggle;
+        btnRemoveAll.onclick = onClickRemoveDone;
+
+		//for load localstorage
+		if (JSON.parse(localStorage.getItem('index5alltask'))) {
+			var storagearrayalltask = JSON.parse(localStorage.getItem('index5alltask'));
+			var storagearraytask = JSON.parse(localStorage.getItem('index5task'));
+			var storagearraydone = JSON.parse(localStorage.getItem('index5done'));
+			
+			for (var i = 0; i < storagearrayalltask.length; i++) {
+				if (storagearrayalltask.length == 1) {
+					arrayalltask.push(storagearrayalltask[i]);
+				} else {
+					if (storagearrayalltask[i] == ',') {
+						if (i%2 != 1) {
+							arrayalltask.push(storagearrayalltask[i]);
+						}
+					} else {
+						arrayalltask.push(storagearrayalltask[i]);
+					}
+				}
+			}
+			
+			for (var i = 0; i < storagearraytask.length; i++) {
+				if (storagearraytask.length == 1) {
+					arraytask.push(storagearraytask[i]);
+				} else {
+					if (storagearraytask[i] == ',') {
+						if (i%2 != 1) {
+							arraytask.push(storagearraytask[i]);
+						}
+					} else {
+						arraytask.push(storagearraytask[i]);
+					}
+				}
+			}
+			
+			for (var i = 0; i < storagearraydone.length; i++) {
+				if (storagearraydone.length == 1) {
+					arraydone.push(storagearraydone[i]);
+				} else {
+					if (storagearraydone[i] == ',') {
+						if (i%2 != 1) {
+							arraydone.push(storagearraydone[i]);
+						}
+					} else {
+						arraydone.push(storagearraydone[i]);
+					}
+				}
+			}
+			
+			for (var i = 0; i < arrayalltask.length; i++){
+				var itemEl = document.createElement('li');
+				var className = 'name';
+				for (var j = 0; j < arraydone.length; j++) {
+					if (arrayalltask[i] == arraydone[j]) {
+						className = 'donetaskname';
+					}
+				}
+				var listMarkup =
+				'<div class="todo-item">' +
+				'<input class = "cb" type = "checkbox">' +
+				'<span class="' + className + '">' + arrayalltask[i] + '</span>' +
+				'</div>';   
+				itemEl.innerHTML = listMarkup;
+				todoListEl.insertBefore(itemEl, todoListEl.childNodes[0]);
+				
+				var cbBtnEl = itemEl.getElementsByClassName('cb')[0];
+				if (className == 'donetaskname') {
+					cbBtnEl.checked = true;
+				}
+				cbBtnEl.onclick = onClickCheckbox;
+			}
+		}
+		donetaskEl.innerHTML = arraydone.length;
+		taskcntEl.innerHTML = arrayalltask.length;
+		
+        txtBoxEl.onkeydown = function(event){
+            if (event.keyCode == 13) {
+                onClickShow();
+            }
+        }
+		
+        function onClickShow() {
+
+            if (txtbox.value == '') {
+                alert('Error :|');
+            }
+
+            else {
+				var same = false;
+                for (var i = 0; i < arrayalltask.length; i++) {
+                    if (arrayalltask[i] == txtBoxEl.value) {
+                        same = true;
+                    }
+                }
+
+                if (same) {
+                    alert('Task Already Exists :|');
+                } else {             
+					var itemEl = document.createElement('li');
+					var listMarkup =
+					'<div class="todo-item">' +
+						'<input class = "cb" type = "checkbox">' +
+						'<span class="name">' + txtBoxEl.value + '</span>' +
+				   '</div>';    
+					itemEl.innerHTML = listMarkup;
+					todoListEl.insertBefore(itemEl, todoListEl.childNodes[0]);
+					
+					arrayalltask.push(txtBoxEl.value);
+					arraytask.push(txtBoxEl.value);
+					txtbox.value = '';
+					
+					donetaskEl.innerHTML = arraydone.length;
+					taskcntEl.innerHTML = arrayalltask.length;
+					savetoLocalStorage();
+
+					var cbBtnEl = itemEl.getElementsByClassName('cb')[0];
+					cbBtnEl.onclick = onClickCheckbox;
+                }
+            }
+        }
+
+        function onClickCheckbox(){
+            var cbBtnEl = event.target;
+			var liItem = cbBtnEl.parentNode; //div .parentNode = li
+			var cbBtnValueEl;
+			
+			if (cbBtnEl.checked) {
+				cbBtnValueEl = liItem.getElementsByClassName('name')[0];
+				for (var i = 0; i < arraytask.length; i++){
+					if (cbBtnValueEl.innerText == arraytask[i]){
+						arraydone.push(arraytask[i]);
+						arraytask.splice(i, 1);
+					}
+				}
+				cbBtnValueEl.className = 'donetaskname';
+			} else {
+				cbBtnValueEl = liItem.getElementsByClassName('donetaskname')[0];
+				for (var i = 0; i < arraydone.length; i++){
+					if (cbBtnValueEl.innerText == arraydone[i]){
+						arraytask.push(arraydone[i]);
+						arraydone.splice(i, 1);
+					}
+				}
+				cbBtnValueEl.className = 'name';
+			}
+			
+			donetaskEl.innerHTML = arraydone.length;
+			savetoLocalStorage();
+        }
+
+        function onClickToggle(){
+            var chckCntr = 0;
+            for (var i = 0; i < arrayalltask.length; i++) {
+                var cbEl = document.getElementsByClassName('cb')[i];
+                
+                if (cbEl.checked) {
+                    chckCntr++;
+                };
+            }
+			
+            for (var i = 0; i < arrayalltask.length; i++) {
+                var cbEl = document.getElementsByClassName('cb')[i];
+            
+                if (chckCntr != arrayalltask.length) {
+					if (!cbEl.checked) {
+						var cbBtnValueEl = document.getElementsByClassName('name')[0];
+						cbBtnValueEl.className = 'donetaskname';
+						for (var j = 0; j < arraytask.length; j++){
+							if (cbBtnValueEl.innerText == arraytask[j]){
+								arraydone.push(arraytask[j]);
+								arraytask.splice(j, 1);
+							}
+						}
+					}
+                    cbEl.checked = true;
+                } else {
+					if (cbEl.checked) {
+						var cbBtnValueEl = document.getElementsByClassName('donetaskname')[0];
+						cbBtnValueEl.className = 'name';
+						for (var j = 0; j < arraydone.length; j++){
+							if (cbBtnValueEl.innerText == arraydone[j]){
+								arraytask.push(arraydone[j]);
+								arraydone.splice(j, 1);
+							}
+						}
+					}
+                    cbEl.checked = false;
+                }
+            }
+			
+			donetaskEl.innerHTML = arraydone.length;
+			savetoLocalStorage();
+        }
+
+        function onClickRemoveDone(){
+			var donelength = arraydone.length;
+			for(var i = 0; i < donelength; i++) {
+				for (var j = 0; j < arrayalltask.length; j++) {
+					if (arraydone[i] == arrayalltask[j]) {
+						arrayalltask.splice(j, 1);
+					}
+				}
+			}
+			
+			for(var i = 0; i < donelength; i++) {
+				var liItem = document.getElementsByClassName('donetaskname')[0].parentNode.parentNode;
+				liItem.remove();
+			}
+			
+			
+			for (var i = 0; i < donelength; i++) {
+				arraydone.splice(0, 1);
+			}
+			
+			donetaskEl.innerHTML = arraydone.length;
+			taskcntEl.innerHTML = arrayalltask.length;
+			savetoLocalStorage();
+        }
+		
+		function savetoLocalStorage() {
+			localStorage.setItem("index5alltask", JSON.stringify(arrayalltask));
+			localStorage.setItem("index5task", JSON.stringify(arraytask));
+			localStorage.setItem("index5done", JSON.stringify(arraydone));
+		}
+    </script>
+</body>
+
+</html>

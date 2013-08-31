@@ -1,0 +1,50 @@
+body{
+	background:#FFC;
+	}
+.main {
+	font-family:Calibri;
+	width: 1200px;
+	margin: auto;
+	float: center;
+	}
+
+.main .todo {
+    width: 400px;
+	margin: 20px;
+    float: left;
+    font-family: calibri;
+}
+
+.main .done {
+    width: 400px;
+	margin: 20px;
+    float: right;
+    font-family: calibri;
+}
+
+#todo-list {
+    list-style: none;
+    width: 100%;
+    padding-left: 0;
+}
+.todo-item {
+    border: 3px solid #000;
+	-webkit-border-radius: 10px;
+	background-color:#CFC;
+    height: 30px;
+    padding: 5px;
+    margin-top: 5px;
+}
+#todo-list .complete {
+   float: right;
+   text-decoration: none;
+}
+
+#btn-add {
+	text-decoration: none;
+	}
+	
+
+h1{
+	text-align:center;
+	}

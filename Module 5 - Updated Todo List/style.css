@@ -1,0 +1,107 @@
+
+body{
+	background:url(IMG/paper.jpg);
+	width:100%;
+	height:100%;
+	margin-top:13px;
+	}
+	
+.main{
+	font-family:Calibri;
+	width: 960px;
+	background: #350000;
+	color:wheat;
+	border: 0px solid #930;
+	border-top-right-radius: 100px;
+}
+
+h1{
+	text-align: center;
+	padding:30px;
+	
+}
+
+h2{
+	text-align: center;
+}
+
+#input-box{
+	width: 40%;
+	margin: auto;
+}
+
+#btn-add{
+	margin-left: 10px;
+	text-decoration: none;
+	color: black;	
+}
+
+#main-left{
+	background: wheat;
+	width: 450px;
+	margin-top:20px;
+	margin-left: 425px;
+    font-family: calibri;
+	color:#000;
+	border: 10px solid #000;
+	border-top-left-radius: 60px;
+	border-bottom-right-radius: 60px;
+	padding:10px 20px 10px 20px;
+}
+
+#toggle{
+	width: 70%;
+	margin: auto;
+	margin-top: 10px;
+}
+#todo-list{
+	text-align: center;
+	list-style: none;
+	width: 100%;
+	padding-left: 0;
+}
+
+#done-list{
+	padding-left: 0;
+	text-align: center;
+}
+
+.todo-item{
+    border: 3px solid #000;
+	border-top-left-radius: 20px;
+	border-bottom-right-radius: 20px;
+	background-color:#CFC;
+    padding: 7px;
+	padding-left:20px;
+    margin-top: 5px;
+	margin-right: 50px;
+	text-align:justify;
+}
+.donetaskname{
+	text-decoration: line-through;
+	font-weight:bolder;
+	color: #003300;
+	font-style:italic;
+}
+
+#todo-list, .complete{
+	margin-left: 20px;
+	text-decoration: none;
+	color: black;
+}
+
+#btn-toggle, #btn-removeAll{
+	color:#000;
+	text-decoration: none;
+	background: #FFFF99;
+	padding:5px 10px 5px 10px;
+	border: 2px solid #000;
+	border-top-left-radius: 20px;
+	margin-left: 20px;
+	
+}
+
+
+
+
+

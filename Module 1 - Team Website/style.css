@@ -1,0 +1,52 @@
+/* CSS Document */
+body { background:url(IMG/bb.jpg);}
+li { font-family:Calibri;}
+h3 { font-family:Calibri;}			
+.h { 
+			margin-top:20px; 
+			margin-bottom:20px; 
+			background-color:#000; 
+			padding-bottom:30px; 
+			padding-left:50px; 
+			height:70px;
+}
+
+.wrapper{ width:900px; height:730px; margin:auto}
+.wrapper .m { 
+			
+			font-family:Calibri;
+			font-size:100px;
+			color:#FFF;
+			}
+.wrapper .mark{ 
+			float:left; width:360px;
+			background:#9CC;
+			padding-top:20px;
+			padding-left:75px;
+			-webkit-border-radius: 10px;
+    		 border-radius: 10px;
+			}	
+					
+.wrapper .mark .m1 {
+			
+			font-family:Calibri;
+			font-size:25px;
+			color:#000;
+			
+					}
+.wrapper .marj { 
+			float:right;width:360px;
+			background:#FCF;
+			padding-top:20px;
+			padding-left:75px;
+			-webkit-border-radius: 10px;
+    		 border-radius: 10px;
+			 }
+.wrapper .marj .m2 {
+		
+			font-family:Calibri;
+			font-size:25px;
+			color:#000;
+			
+}
+.f { margin-bottom:10px; width:1000px;}
