@@ -69,7 +69,7 @@
 					</div>
 
 					<div>
-						<img src="{{posters.profile}}" width="180px" height="250px">
+						<img src="{{posters.detailed}}" width="180px" height="250px">
 						<br>
 						<br>
 
@@ -84,9 +84,18 @@
 								<div>
 									<img src="{{posters.profile}}" width="180px" height="250px">
 									<p><h4>Synopsis</h4>
-		                        		<blockquote>{{synopsis}}</blockquote></p>
+		                        		<blockquote>{{synopsis}}</blockquote>
+		                        	<br>
+		                        		<h4>MPAA Rating:</h4> <p>{{mpaa_rating}}</p>
+		                        	<br>
+		                        		<h4>Critics Consensus:</h4>
+		                        		<p>&quot;{{critics_consensus}}&quot;</p>
+
+
+		                        	</p>
+		                        
 									
-									<a class="close-reveal-modal">&#215;</a>
+								<a class="close-reveal-modal">&#215;</a>
 							
 								</div>
 						</div>
@@ -102,11 +111,11 @@
 
 
 	<!-- Progress bar-->
-
-	<div class="progress progress-striped active" id"prg-bar">
-	  <div class="bar" style="width: 40%;"></div>
-	  <p id = "load-txt">&nbsp;&nbsp;&nbsp;&nbsp;Loading Movies...</p>
-	</div>
+		
+		<div class="progress progress-striped active" id"prg-bar">
+			  <div class="bar" style="width: 40%;"></div>
+			  <p id = "load-txt">&nbsp;&nbsp;&nbsp;&nbsp;Loading Movies...</p>
+		</div>
 
 	<!-- Progress bar-->
 
@@ -244,7 +253,7 @@
 
 
 
-	<!-- Pagination-->
+	<!-- 
 
 	<div class="pagination pagination-centered">
 		  <ul>
@@ -257,8 +266,7 @@
 		    <li><a href="#">Next</a></li>
 		  </ul>
 	</div>
-	
-	<!-- Pagination-->
+	Pagination-->
 	
 
 
