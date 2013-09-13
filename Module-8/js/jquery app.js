@@ -65,14 +65,12 @@ $(function () {
 		
 		var total = response.total;
 		var movies = response.movies;
+		var movieObject ="";
 
 			for (var i = 0; i < movies.length; i++) {
 				var movie = movies[i];
 				$('#movie-result-list').append(getTemplate('tpl-movie-detail', movie));
 			}
-
-		//Page
-		
 		
 		//Event
 			//$("#btn-more").click(function(){
