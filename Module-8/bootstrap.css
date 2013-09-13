@@ -8,27 +8,6 @@
  * Designed and built with all the love in the world @twitter by @mdo and @fat.
  */
 
-
- .span4{
-   border: 4px solid black;
-   border-top-right-radius: 50px;
-   border-bottom-left-radius: 50px;
-   margin-bottom:30px;
-   padding:15px;
-}
- 
-#textbox{
-width: 300px;
-height:30px;
-}
-
-.btn btn-default{
-width:100px;
-height:35px;
-float: right;
-}
-
- 
 .clearfix {
   *zoom: 1;
 }
@@ -655,8 +634,6 @@ a:focus {
 .container-fluid {
   padding-right: 20px;
   padding-left: 20px;
-  padding-top:15px;
-  padding-bottom:15px;
   *zoom: 1;
 }
 
@@ -3134,7 +3111,6 @@ table th[class*="span"],
 .well {
   min-height: 20px;
   padding: 19px;
-  margin-top: 80px;
   margin-bottom: 20px;
   background-color: #f5f5f5;
   border: 1px solid #e3e3e3;
@@ -4415,18 +4391,6 @@ input[type="submit"].btn.btn-mini {
           box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
 }
 
-.navbar-out {
-padding-top:15px;
-  min-height: 40px;
-  padding-right: 20px;
-  padding-left: 20px;
-  background-color:1d1d1d;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#fff2f2f2', GradientType=0);
-  *zoom: 1;
-  
-}
-
-
 .navbar-inner:before,
 .navbar-inner:after {
   display: table;
@@ -4457,7 +4421,6 @@ padding-top:15px;
   color: #777777;
   text-shadow: 0 1px 0 #ffffff;
 }
-
 
 .navbar .brand:hover,
 .navbar .brand:focus {
@@ -6156,7 +6119,6 @@ a.badge:focus {
 
 .hero-unit {
   padding: 60px;
-  margin-top: 80px;
   margin-bottom: 30px;
   font-size: 18px;
   font-weight: 200;

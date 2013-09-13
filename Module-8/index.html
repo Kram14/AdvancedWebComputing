@@ -1,16 +1,278 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
 <head>
 <title>m&m Module 8</title>
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
-	<h1>Module 8 </h1>
             
-           <script type="text/javascript" src="js/handlebars.js"></script>
-		   <script type="text/javascript" src="js/jquery  jq.js"></script>
+	       <script type="text/javascript" src="js/handlebars.js"></script>
+		   <script type="text/javascript" src="js/jquery jq.js"></script>
 		   <script type="text/javascript" src="js/jquery app.js"></script>
-           
+		   <script src="js/jquery.min.js"></script>
+
+		   <!-- Attach our CSS -->
+	  	<link rel="stylesheet" href="reveal/reveal.css">	
+	  	
+		<!-- Attach necessary scripts -->
+		<!-- <script type="text/javascript" src="jquery-1.4.4.min.js"></script> -->
+		<script type="text/javascript" src="reveal/jquery-1.6.min.js"></script>
+		<script type="text/javascript" src="reveal/jquery.reveal.js"></script>
+		
+		<style type="text/css">
+			body { font-family: "HelveticaNeue","Helvetica-Neue", "Helvetica", "Arial", sans-serif; }
+			.big-link { display:block; margin-top: 100px; text-align: center; font-size: 70px; color: #06f; }
+		</style>
+
+
+	<!-- Top Navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#"> m&m Movie Search</a>
+        	<ul class="nav nav-list">
+              <li id = "bom"><a href="#">&nbsp;&nbsp;Box Office Movies&nbsp;&nbsp;</a></li>
+              <li id = "itm"><a href="#">&nbsp;&nbsp;In Theaters Movies&nbsp;&nbsp;</a></li>
+              <li id = "opm"><a href="#">&nbsp;&nbsp;Opening Movies&nbsp;&nbsp;</a></li>
+              <li id = "upm"><a href="#">&nbsp;&nbsp;Upcoming Movies&nbsp;&nbsp;</a></li>
+              <li id = "tor"><a href="#">&nbsp;&nbsp;Top Rentals&nbsp;&nbsp;</a></li>
+              <li id = "crd"><a href="#">&nbsp;&nbsp;Current Release DVDs&nbsp;&nbsp;</a></li>
+              <li id = "nrd"><a href="#">&nbsp;&nbsp;New Release DVDs&nbsp;&nbsp;</a></li>
+              <li id = "upd"><a href="#">&nbsp;&nbsp;Upcoming DVDs&nbsp;</a></li>
+             </ul>
+              <form class="navbar-form pull-right">
+	              <input id="textbox" type="text" placeholder="Search Movie...">
+	              <button class="btn btn-default" type="submit" id="btn_s">Search</button>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content ng handlebars-->
+
+    <div class="row-fluid">
+    	<div class="hero-unit">
+		<div id="thumbnails" class="row">
+			<script id="tpl-movie-detail" type="text/x-handlebars-template">
+				<div class="span4">
+					<div class = "titulo">
+						{{title}} ({{year}})
+					</div>
+
+					<div>
+						<img src="{{posters.profile}}" width="180px" height="250px">
+						<br>
+						<br>
+
+						<a href="#" id = "btn-more" role="button" class="btn" data-reveal-id="myModal" data-animation="fadeAndPop" data-animationspeed="300" data-closeonbackgroundclick="true" data-dismissmodalclass="close-reveal-modal">More Details &raquo</a>
+						
+
+						<div id="myModal" class="reveal-modal">
+								<div class = "titulo">
+									<h2>{{title}} ({{year}})</h2>
+								</div>
+
+								<div>
+									<img src="{{posters.profile}}" width="180px" height="250px">
+									<p><h4>Synopsis</h4>
+		                        		<blockquote>{{synopsis}}</blockquote></p>
+									
+									<a class="close-reveal-modal">&#215;</a>
+							
+								</div>
+						</div>
+					</div>
+				</div>
+			</script>
+		</div>
+
+			<ul id="movie-result-list"></ul>
+		</div>
+	</div>
+
+
+
+	<!-- Progress bar-->
+
+	<div class="progress progress-striped active" id"prg-bar">
+	  <div class="bar" style="width: 40%;"></div>
+	  <p id = "load-txt">&nbsp;&nbsp;&nbsp;&nbsp;Loading Movies...</p>
+	</div>
+
+	<!-- Progress bar-->
+
+
+
+	<!-- MODAL-->
+	<style>
+			* {
+				margin:0; 
+				padding:0;
+			}
+
+			#overlay {
+				position:fixed; 
+				top:0;
+				left:0;
+				width:100%;
+				height:100%;
+				background:#000;
+				opacity:0.5;
+				filter:alpha(opacity=50);
+			}
+
+			#modal {
+				position:absolute;
+				background:url(tint20.png) 0 0 repeat;
+				background:rgba(0,0,0,0.2);
+				border-radius:14px;
+				padding:8px;
+			}
+
+			#content {
+				border-radius:8px;
+				background:#fff;
+				padding:20px;
+			}
+
+			#close {
+				position:absolute;
+				background:url(close.png) 0 0 no-repeat;
+				width:24px;
+				height:27px;
+				display:block;
+				text-indent:-9999px;
+				top:-7px;
+				right:-7px;
+			}
+		</style>
+		<script src="./jQuery Modal Demo_files/jquery.min.js"></script>
+		<script>
+			var modal = (function(){
+				var 
+				method = {},
+				$overlay,
+				$modal,
+				$content,
+				$close;
+
+				// Center the modal in the viewport
+				method.center = function () {
+					var top, left;
+
+					top = Math.max($(window).height() - $modal.outerHeight(), 0) / 2;
+					left = Math.max($(window).width() - $modal.outerWidth(), 0) / 2;
+
+					$modal.css({
+						top:top + $(window).scrollTop(), 
+						left:left + $(window).scrollLeft()
+					});
+				};
+
+				// Open the modal
+				method.open = function (settings) {
+					$content.empty().append(settings.content);
+
+					$modal.css({
+						width: settings.width || 'auto', 
+						height: settings.height || 'auto'
+					});
+
+					method.center();
+					$(window).bind('resize.modal', method.center);
+					$modal.show();
+					$overlay.show();
+				};
+
+				// Close the modal
+				method.close = function () {
+					$modal.hide();
+					$overlay.hide();
+					$content.empty();
+					$(window).unbind('resize.modal');
+				};
+
+				// Generate the HTML and add it to the document
+				$overlay = $('<div id="overlay"></div>');
+				$modal = $('<div id="modal"></div>');
+				$content = $('<div id="content"></div>');
+				$close = $('<a id="close" href="#">close</a>');
+
+				$modal.hide();
+				$overlay.hide();
+				$modal.append($content, $close);
+
+				$(document).ready(function(){
+					$('body').append($overlay, $modal);						
+				});
+
+				$close.click(function(e){
+					e.preventDefault();
+					method.close();
+				});
+
+				return method;
+			}());
+
+			// Wait until the DOM has loaded before querying the document
+			$(document).ready(function(){
+
+				$.get('ajax.html', function(data){
+					modal.open({content: data});
+				});
+
+				$('#btn_s').click(function(e){
+					if($('#textbox').val() == ''){
+					modal.open({content: "Error. Invalid input."});
+					e.preventDefault();
+				};
+				});
+			});
+		</script>
+
+	<!-- MODAL-->
+
+
+
+
+	<!-- Pagination-->
+
+	<div class="pagination pagination-centered">
+		  <ul>
+		    <li><a href="#">Prev</a></li>
+		    <li><a href="#">1</a></li>
+		    <li><a href="#">2</a></li>
+		    <li><a href="#">3</a></li>
+		    <li><a href="#">4</a></li>
+		    <li><a href="#">5</a></li>
+		    <li><a href="#">Next</a></li>
+		  </ul>
+	</div>
+	
+	<!-- Pagination-->
+	
+
+
+	<!-- Footer-->
+	 
+	 <div class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-out">
+          <p class="navbar-brand-b"><center>Advanced Web Computing <br> &copy; Copyright 2013</center></p>
+             </div>
+        </div>
+
+    <!-- Footer-->
+
+ 
 </body>
 
 </html>
