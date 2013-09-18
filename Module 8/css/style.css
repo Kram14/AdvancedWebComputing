@@ -88,6 +88,10 @@
 img:hover {
 	-webkit-filter: brightness(70%);
 }
+
+img:hover {
+	-webkit-filter: brightness(70%);
+}
  
 #textbox{
 /*width: 300px;*/
