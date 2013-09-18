@@ -65,10 +65,10 @@
 	width:100%;
  }
  
- .try, .navbar-form pull-right{
+ /*.try, .navbar-form pull-right{
 	margin:auto;
 	float:center;
- }
+ }*/
  
  .span4{
 	background-color:#E8F0EA;
@@ -81,8 +81,12 @@
 	padding-top:15px;
 	padding-bottom:15px;
 	text-align:center;
-	float: left
+	float: center;
 
+}
+
+img:hover {
+	-webkit-filter: brightness(70%);
 }
  
 #textbox{

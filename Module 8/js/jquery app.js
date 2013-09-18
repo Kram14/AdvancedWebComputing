@@ -3,7 +3,6 @@ $(function () {
 	var server = 'http://api.rottentomatoes.com/api/public/v1.0/';
 	var dataSearch = {q: '', apiKey:'gvru729uj8x33ykh4zjvw4nv'};
 	var searchKey;
-	var apkey = "hcrurhsttexasrgfm2y6yahm";
 	var total;
 
 	//Enter

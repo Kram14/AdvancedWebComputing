@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html>
+<head>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
+  </head>
+  <body>
+  <header>
+		<!--<img src="IMG/red.png">-->
+		<div><h1><b>m&m Guestbook </b></h1></div>
+	</header>
+	<br><hr>
+  <center>
+    {% for greeting in greetings %}
+      {% if greeting.author %}
+        <b>{{ greeting.author.nickname() }}</b> wrote:
+      {% else %}
+       An anonymous person wrote:
+      {% endif %}
+      <blockquote>{{ greeting.content }}</blockquote>
+    {% endfor %}
+
+    <form action="/sign?guestbook_name={{ guestbook_name }}" method="post">
+      <div><textarea name="content" rows="3" cols="60"></textarea></div>
+      <div><input type="submit" value="Sign Guestbook"></div>
+    </form>
+
+    
+	<br><br>
+
+    <form>Guestbook name:
+      <input value="{{ guestbook_name }}" name="guestbook_name">
+      <input type="submit" value="Switch">
+    </form>
+
+	<br>
+	
+	<div class="a1">
+    <a href="{{ url|safe }}">{{ url_linktext }}</a>
+	</div>
+	</center>
+	
+	<br>
+	
+	<footer>
+	<div class="navbar navbar-inverse navbar-fixed-bottom">
+      <div class="navbar-out">
+	  
+          <p class="navbar-brand-b"><center><a href = "#">Advanced Web Computing / &copy; Copyright 2013 / </a>
+		  <a href = "http://kram14.github.io/AdvancedWebComputing/About%20Us/">About Us</a></center>
+		  </p></div>
+        </div>
+	</footer>
+  </body>
+</html>
+{% endautoescape %}

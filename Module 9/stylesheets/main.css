@@ -1,0 +1,71 @@
+body {
+  font-family: Century Gothic;
+  background-color: #DDDDDD;
+  margin-top:5px;
+}
+
+header {
+				color:white;
+				background-color:#1a1a1a;
+				background-position:right bottom;
+				border: 5px solid #1a1a1a;
+				display: -webkit-flex;
+				display: flex;
+				-webkit-flex-flow: row;
+				flex-flow: row;
+				-webkit-justify-content: flex-start;		
+				justify-content: flex-start;
+				-webkit-align-content: center;
+				align-content: center;
+				-webkit-align-items: center;
+				align-items: center;
+				margin: 4px;
+			    padding: 5px;
+				padding-left: 15px;
+			    min-height: 30px;
+				border-top-right-radius:700px;
+			}
+
+textarea{
+	border: 5px solid black;
+	border-radius: 20px;
+	
+
+}
+
+input{
+	
+	border-radius: 15px;
+	padding:5px;
+
+}	
+
+a{
+	text-decoration:none;
+	color:white;
+}
+
+.a1{
+	background-color:black;
+	padding:8px;
+	width:200px;
+
+}
+footer {
+				color:#999999;
+				text-align: center;
+				background-color:#1a1a1a;
+				border: 5px solid #1a1a1a;
+				display: -webkit-flex;
+				display: flex;
+				-webkit-flex: 1;
+				flex: 1;
+				-webkit-flex-flow: row;
+				flex-flow: row;
+				-webkit-justify-content: center;
+				justify-content: center;
+				-webkit-align-content: center;
+				align-content: center;
+				-webkit-align-items: center;
+			}		
+		
