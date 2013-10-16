@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html>
     <head>
@@ -70,14 +71,14 @@
                 <div class='row app-content'>
                 </div>
             </div>
-		<!--GIF-->
-		<center>
-			<div class="fadegif">
-				<img src="IMG/web.gif" width = 60% height = 60%>
-			</div>
-		</center>
+				<!--GIF-->
+					 <center>
+					 <div class="fadegif">
+							<img src="IMG/web.gif" width = 60% height = 60%>
+					 </div>
+					 </center>
 					 
-		<!--end of GIF-->
+					<!--end of GIF-->
         </div>
 		
 		
@@ -93,12 +94,16 @@
         <script src="js/bootstrap.js"></script>
         <script src="js/app.js"></script>
 		
-		<!-- Attach our CSS for Modal-->
-		<link rel="stylesheet" href="reveal/reveal.css">	
+		<!-- Attach our CSS -->
+			<link rel="stylesheet" href="reveal/reveal.css">	
+	  	
+		<!-- Attach necessary scripts -->
+		<!-- <script type="text/javascript" src="jquery-1.4.4.min.js"></script> -->
 		<script type="text/javascript" src="reveal/jquery-1.6.min.js"></script>
 		<script type="text/javascript" src="reveal/jquery.reveal.js"></script>
 		<!-- Modal-->
 		<script src="./jQuery Modal Demo_files/jquery.min.js"></script>
+			
 		<!-- end ofscripts -->
 
 
@@ -111,7 +116,7 @@
                         <center><tr>
                             <th>Year</th>
                             <th>Title</th>
-				<th></th>
+							<th></th>
                         </tr></center>
                     </thead>
                     <tbody class='thesis-list'>
@@ -125,7 +130,9 @@
                 <td>{{Year}}</td>
                 <td>{{Title}}</td>
                 <td>
-                    <a href='javascript:void(0)' class='btn-edit'>Edit</a> &nbsp;
+					<a href='javascript:void(0)' class='view'>View</a> &nbsp; 
+                    <a href='javascript:void(0)' class='edit'>Edit</a> &nbsp; 
+					<a href='javascript:void(0)' class='delete'>Delete</a> &nbsp;
                 </td>
             </tr>
         </script>
@@ -182,9 +189,9 @@
 				
 				<!-- modal -->
 				<div class= "div-modal">
-				<a href="#" id = "btn-more" role="button" class="btn-view" data-reveal-id="myModal{{Id}}" data-animation="fadeAndPop" data-animationspeed="300" data-closeonbackgroundclick="true" data-dismissmodalclass="close-reveal-modal">View Details &raquo</a>
-				
-					<br><br>
+				<a href="#" id = "btn-more" role="button" class="btn-view" data-reveal-id="myModal{{Id}}" data-animation="fadeAndPop" data-animationspeed="300" data-closeonbackgroundclick="true" data-dismissmodalclass="close-reveal-modal">View More Details &raquo</a>
+					
+					<br><br><br>
 					<button id="back-btn" type="button" class="btn-cancel btn btn-default" onclick="back()">Back</button>
 					
 				</center>	
