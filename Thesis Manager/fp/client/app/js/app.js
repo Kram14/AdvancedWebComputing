@@ -160,37 +160,28 @@ $(function() {
         },
         displayLoadedList: function(list) {
             console.log('response', list);
-            //  use tpl-thesis-list-item to render each loaded list and attach it
-			for (var i = 0; i < list.length; i++){
-				$('.thesis-list').append(getTemplate('tpl-thesis-list-item', list[i]));
-			}
-			
-			var linkClicked = false;
-			
-			$('.table tbody tr a').click(function (event) {
-				linkClicked = true;
-			});
-			
-			$('.table tbody tr').click(function (event) {
-				if (!linkClicked){
-					app.router.navigate('thesis-' + $(this).attr('data-id'), {trigger: true});
-					$('.menu-create').removeClass('active');
-					$('.menu-list').removeClass('active');
-				} 
-				else {
-					app.router.navigate('edit-' + $(this).attr('data-id'), {trigger: true});
-					linkClicked = false;
-					$('.menu-create').removeClass('active');
-					$('.menu-list').removeClass('active');
-				}
-			});
-			
-			/* ----Delete table row
-			$('.table tbody tr td').live('click', function (event) {
-				var $row = $(this).closest('tr');
-				$(this).closest("tr").remove();
-			}); */
-	
+			var self = this;
+			_.each(list, function(item) {
+                var $thesisItem = $(getTemplate('tpl-thesis-list-item', item));
+                var id = item.Id
+                if (item.Key) {
+                    id = item.Key;
+                }
+
+                $thesisItem.find('.view').click(function() {
+                    self.router.navigate('thesis-' + id, {trigger: true});
+                });
+
+                $thesisItem.find('.edit').click(function() {
+                    self.router.navigate('edit-' + id, {trigger: true});
+                });
+               
+                $thesisItem.find('.delete').click(function() {
+                    self.router.navigate('delete-' + id, {trigger: true});
+                });
+
+                $('.thesis-list').append($thesisItem);
+            });
 			
         },
         save: function(object) {
@@ -211,7 +202,18 @@ $(function() {
 			else{
 				alert("No entry.");
 			}
-        }
+        },
+		
+		deleteThesis: function(id){
+            var self = this;
+            $.ajax({
+                type: 'DELETE',
+                url: '/api/thesis/' + id,
+                success: function() {
+                    self.router.navigate('list', {trigger: true});
+                }
+            });
+        },
 
 
     };
@@ -233,7 +235,8 @@ $(function() {
             'new': 'onCreate',
             'edit-:id': 'onEdit',
             'search-:query': 'onSearch',
-            'list': 'onList'
+            'list': 'onList',
+            'delete-:id': 'onDelete'
         },
 
        onHome: function() {
@@ -268,7 +271,11 @@ $(function() {
        onList: function() {
             app.showList();
             app.loadAllThesis();
-       }
+       },
+
+       onDelete: function(id) {
+            app.deleteThesis(id);
+       },
 
     });
     app.init();
